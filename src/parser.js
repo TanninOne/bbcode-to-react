@@ -10,7 +10,7 @@ export default class Parser {
     this.tags = {};
 
     if (!allowedTags) {
-      this.tags = defaultTags;
+      this.tags = { ...defaultTags };
     } else {
       allowedTags.forEach(name => {
         if (defaultTags[name]) {
