@@ -30,13 +30,8 @@ export default class Parser {
     const params = [];
 
     function addParam(name, value) {
-      if (name) {
-        const n = name.trim();
-        // ignore on* events attribute
-        if (n.length && n.toLowerCase().indexOf('on') !== 0) {
-          params.push([n, value]);
-        }
-      }
+      const n = name.trim();
+      params.push([n, value]);
     }
 
     if (token) {
@@ -99,6 +94,9 @@ export default class Parser {
 
       if (token.match(TOKEN_RE)) {
         let params = this.parseParams(token.slice(1, -1));
+        if (params.length === 0) {
+          continue;
+        }
         let tagName = params[0][0].toLowerCase();
 
         if (current.CLOSED_BY.indexOf(tagName) > -1) {
