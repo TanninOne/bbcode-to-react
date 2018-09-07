@@ -383,13 +383,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var params = [];
 	
 	      function addParam(name, value) {
-	        if (name) {
-	          var n = name.trim();
-	          // ignore on* events attribute
-	          if (n.length && n.toLowerCase().indexOf('on') !== 0) {
-	            params.push([n, value]);
-	          }
-	        }
+	        var n = name.trim();
+	        params.push([n, value]);
 	      }
 	
 	      if (token) {
@@ -454,6 +449,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (token.match(_constants.TOKEN_RE)) {
 	          var params = this.parseParams(token.slice(1, -1));
+	          if (params.length === 0) {
+	            continue;
+	          }
 	          var tagName = params[0][0].toLowerCase();
 	
 	          if (current.CLOSED_BY.indexOf(tagName) > -1) {
